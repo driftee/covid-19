@@ -1,31 +1,18 @@
-# -*- coding:utf-8 -*-
-
 from flask import Flask, render_template, request
-from werkzeug.utils import secure_filename
 
 import pandas as pd
 import numpy as np
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'upload/'
-import matplotlib.pyplot as plt
-
-
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
-    return render_template('upload.html')
 
 
 @app.route('/model_api/', methods=['GET', 'POST'])
 def api1():
 
-
     requestData = eval(request.data)
-
 
     province = requestData["province"]
     day_to_predict = requestData["day_to_predict"]
-
 
     province_file_dict = {
         "北京": "data/beijing-true.xlsx",
@@ -196,7 +183,6 @@ def api1():
 
     return {
         "x": list(x),
-        # "predictX": list(range(t + day_to_predict)),
         "simpI": tt4[0, :].tolist(),
         "truepI": data[:, 0].tolist(),
         "predictpI": predict_I.tolist()[1:],
@@ -211,51 +197,6 @@ def api1():
 
     }
 
-    # plt.figure(0)
-
-    # plt.plot(x, tt4[0, :])
-    # plt.plot(x, data[:, 0])
-    # plt.show()
-    #  #disp(tt)
-    # disp(tt2) #输出满足要求的r，p
-    # xlswrite('rp.xlsx',tt2)
-
-
-    # figure(1)
-    # plot(x,tt4(1,:),'r') #计算的pI值图像
-    # hold on
-    # plot(x,num(:,1)','b')
-    # legend('模拟的PI值','真实值')
-
-
-    # figure(2) 
-    # plot(x,tt4(2,:),'r') #计算的Q值图像
-    # hold on
-    # plot(x,num(:,2)','b')
-    # legend('模拟的Q值','真实Q')
-
-
-    # figure(3)
-    # plot(x,tt2(1,:),'r')
-    # legend('Rt值')
-
-
-    # figure(4)
-    # plot(x,tt2(2,:),'b')
-    # legend('p值')
-    # end
-
-
-def qwq():
-    print(123)
-
-
-def qwq():
-    print(123)
-
 
 if __name__ == '__main__':
     app.run(debug=True, port=4060, host='0.0.0.0')
-
-
-    exit(0)
