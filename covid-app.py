@@ -26,7 +26,7 @@ def api1():
 
     data = np.array(data)
 
-    print(data)
+    # print(data)
 
     e12 = requestData["e12"]
     e3 = requestData["e3"]
